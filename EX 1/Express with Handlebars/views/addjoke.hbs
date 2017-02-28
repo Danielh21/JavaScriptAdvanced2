@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>All The Jokes</title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <script
+  src="https://code.jquery.com/jquery-3.1.1.min.js"
+  integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+  crossorigin="anonymous"></script>
+    <script>
+        $( document ).ready(function() {
+            $("#click").click(function(){
+               var text =  $("#newJoke").val();
+               $("#newJoke").val("");
+               var request = $.ajax({
+                url: "/storejoke",
+                type: "POST",
+                data: {joke : text}, 
+                    });
+                    request.done(function (){
+                        console.log("Succes");
+                    });
+                    request.fail(function(code){
+                        console.log("fail " + code.responseText);
+                    });
+        });
+    });
+    </script>
+  </head>
+  <body>
+    <h1> Add Joke </h1>
+
+   <textarea id=newJoke></textarea>
+
+   <input type="button" value="Submit" id="click" >
+
+  </body>
+</html>
